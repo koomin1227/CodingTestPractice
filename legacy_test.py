@@ -1,42 +1,59 @@
-def solution(id_list, report, k):
-    answer = []
-    ind={}
-    a=0
-    for i in id_list:
-        ind[i]=[]
-        ind[i].append(set())#신고한 id
-        ind[i].append([])#정지된 id
-        ind[i].append(set())#신고당한 id
-        a+=1
-    repor=set(report)
-    for i in report:
-        report_id,reported_id=i.split()
-        ind[report_id][0].add(reported_id)
-        ind[reported_id][2].add(report_id)
+from collections import deque
+from itertools import combinations
+import sys
+input = sys.stdin.readline
+INF = int(1e9)
+N,M = map(int,input().split())
 
-    for i in ind.keys():
-        if len(ind[i][2])>=k:
-            for j in ind.keys():
-                if i!=j:
-                    for t in ind[j][0]:
-                        if t==i:
-                            ind[j][1].append(i)
-    for i in id_list:
-        answer.append(len(ind[i][1]))
+board = []
+virus = []
+no_virus = []
 
+for i in range(N):
+    tmp = list(map(int,input().split()))
+    board.append(tmp)
+    for j in range(len(tmp)):
+        if tmp[j] == 0:
+            no_virus.append((i,j))
+        elif tmp[j] == 2:
+            virus.append((i,j))
 
+dxy = [[0,1],[0,-1],[1,0],[-1,0]]
 
-        
-    return answer
+def BFS(v_x,v_y,visited):
 
-id_list=["muzi", "frodo", "apeach", "neo"]
-report=["muzi frodo","apeach frodo","frodo neo","muzi neo","apeach muzi"]
-k=2
+    q = deque()
+    q.append((v_x,v_y))
+    visited[v_x][v_y] = True
+    result = 0
+    while q:
+        x,y = q.popleft()
+        for dt in dxy:
+            tmp_x, tmp_y = x+dt[0],y+dt[1]
+            if 0<= tmp_x <N and 0<=tmp_y <M and board[tmp_x][tmp_y] == 0 and visited[tmp_x][tmp_y] == False:
+                visited[tmp_x][tmp_y] = True
+                q.append((tmp_x,tmp_y))
+                result += 1
 
-"""
-id_list=["con", "ryan"]
-report=["ryan con", "ryan con", "ryan con", "ryan con"]
-k=3
-"""
+    return result, visited
 
-print(solution(id_list,report,k))
+no_virus_comb = list(combinations(no_virus,3))
+min_val = INF
+
+for v in no_virus_comb:
+    result = 0
+    for nvx, nvy in v:
+        board[nvx][nvy] = 1
+
+    visited = [[False for _ in range(M)] for _ in range(N)]
+    #print(board)
+    for vx, vy in virus:
+        tmp_result, visited = BFS(vx,vy,visited)
+        result += tmp_result
+    if min_val > result:
+        min_val = result
+
+    for nvx, nvy in v:
+        board[nvx][nvy] = 0
+
+print(len(no_virus)-3-min_val)

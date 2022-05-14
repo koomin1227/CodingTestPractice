@@ -1,50 +1,48 @@
-def solution(id_list, report, k):
+def solution(n, build_frame):
     answer = []
-    ind={}
-    a=0
-    for i in id_list:
-        ind[i]=[]
-        ind[i].append([])#신고한 id
-        ind[i].append([])#정지된 id
-        ind[i].append([])#신고당한 id
-        a+=1
-    for i in report:
-        report_id,reported_id=i.split()
-        tmp=0
-        for j in ind[report_id][0]:
-            if j==reported_id:
-                tmp=1
-        if tmp==0:
-            ind[report_id][0].append(reported_id)
-        for j in ind[reported_id][0]:
-            if j==report_id:
-                tmp=1
-        if tmp==0:
-            ind[reported_id][2].append(report_id)
+    wall=[[-1]*(n+1) for _ in range(n+1)]#-1:빈상태 0:기둥 1:보 2:기둥,보
+    for frame in build_frame:
+        if frame[3]==1:#설치
+            if frame[2]==0:#기둥
+                if frame[1]==0 or wall[frame[1]-1][frame[0]]==0 or wall[frame[1]-1][frame[0]]==2 or wall[frame[1]][frame[0]-1]==1:#기둥 설치
+                    if wall[frame[1]][frame[0]]==1:
+                        wall[frame[1]][frame[0]]=2
+                    else:
+                        wall[frame[1]][frame[0]]=0
+            else:#보
+                if wall[frame[1]-1][frame[0]]==0 or wall[frame[1]-1][frame[0]+1]==0 or wall[frame[1]-1][frame[0]]==2 or wall[frame[1]-1][frame[0]+1]==2 or (wall[frame[1]][frame[0]-1]==1 and wall[frame[1]][frame[0]+1]==1):
+                    if wall[frame[1]][frame[0]]==0:
+                        wall[frame[1]][frame[0]]=2
+                    else:
+                        wall[frame[1]][frame[0]]=1
             
-    for i in ind.keys():
-        if len(ind[i][2])>=k:
-            for j in ind.keys():
-                if i!=j:
-                    for t in ind[j][0]:
-                        if t==i:
-                            ind[j][1].append(i)
-    for i in id_list:
-        answer.append(len(ind[i][1]))
+        else:#삭제
+            if frame[2]==0:
+                if wall[frame[1]+1][frame[0]]==-1:
+                    if wall[frame[1]][frame[0]]==2:
+                        wall[frame[1]+1][frame[0]]=1
+                    else:
+                        wall[frame[1]+1][frame[0]]=-1
+                elif wall[frame[1]+1][frame[0]]==1 and (wall[frame[1]+1][frame[0]-1]==0 or wall[frame[1]+1][frame[0]-1]==2 or ) :
+            #pass
+    #print(wall)
+    for i in range(n+1):
+        for j in range(n+1):
+            if wall[j][i]==0 or wall[j][i]==1:
+                answer.append([i,j,wall[j][i]])
+            elif wall[j][i]==2:
+                answer.append([i,j,0])
+                answer.append([i,j,1])
 
 
-
-        
     return answer
 
-id_list=["muzi", "frodo", "apeach", "neo"]
-report=["muzi frodo","apeach frodo","frodo neo","muzi neo","apeach muzi"]
-k=2
 
-"""
-id_list=["con", "ryan"]
-report=["ryan con", "ryan con", "ryan con", "ryan con"]
-k=3
-"""
 
-print(solution(id_list,report,k))
+
+
+
+
+n=5
+build_frame=[[1,0,0,1],[1,1,1,1],[2,1,0,1],[2,2,1,1],[5,0,0,1],[5,1,0,1],[4,2,1,1],[3,2,1,1]]
+print(solution(n,build_frame))
