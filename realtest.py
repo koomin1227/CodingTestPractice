@@ -1,62 +1,77 @@
-def turn_snake(spin_info,time,snake_info):
-    for t in spin_info:
-        if t[0]==time:
-            if t[1]=='D':
-                snake_info[0][2]-=1
-                if snake_info[0][2]==-1:
-                    snake_info[0][2]=3
-            else:
-                snake_info[0][2]+=1
-                if snake_info[0][2]==4:
-                    snake_info[0][2]=0
-            break
-    return snake_info[0][2]
-    
-apple_info=[]
-spin_info=[]
-way=[(-1,0),(0,-1),(1,0),(0,1)]#uldr
-snake_info=[[1,1,3]]#행 열 방향
-time=0
-tail_count=0
-tail_judge=0
-tmp=0
-n=int(input())
-k=int(input())
-for i in range(k):
-    a=list(map(int,input().split()))
-    apple_info.append(a)
-l=int(input())
-for i in range(l):
-    a,b=map(str,input().split())
-    c=[int(a),b]
-    spin_info.append(c)
+from sys import stdin
+from collections import deque
+n,l,r=map(int,stdin.readline().split())
+land=[]
+dx=[-1,0,1,0]#uldr
+dy=[0,-1,0,1]
+for i in range(n):
+    land.append(list(map(int,stdin.readline().split())))
+#연합처리 함수
+def dfs(x,y,day):
+    num=0
+    tot=0
+    com=[]
+    que=deque()
+    que.append([x,y])
+    com.append([x,y])
+    if visited[x][y]==day:
+        return False
+    visited[x][y]=day
+    while que:
+        c=que.popleft()
+        num+=1
+        tot+=land[c[0]][c[1]]
+        
+        nx=c[0]+dx[0]
+        ny=c[1]+dy[0]
+        if nx>=0 and nx<n and ny>=0 and ny<n:
+            if visited[nx][ny]!=day and (abs(land[c[0]][c[1]]-land[nx][ny])>=l and abs(land[c[0]][c[1]]-land[nx][ny])<=r):
+                que.append([nx,ny])
+                com.append([nx,ny])
+                visited[nx][ny]=day
+        nx=c[0]+dx[1]
+        ny=c[1]+dy[1]
+        if nx>=0 and nx<n and ny>=0 and ny<n:
+            if visited[nx][ny]!=day and (abs(land[c[0]][c[1]]-land[nx][ny])>=l and abs(land[c[0]][c[1]]-land[nx][ny])<=r):
+                que.append([nx,ny])
+                com.append([nx,ny])
+                visited[nx][ny]=day
+        nx=c[0]+dx[2]
+        ny=c[1]+dy[2]
+        if nx>=0 and nx<n and ny>=0 and ny<n:
+            if visited[nx][ny]!=day and (abs(land[c[0]][c[1]]-land[nx][ny])>=l and abs(land[c[0]][c[1]]-land[nx][ny])<=r):
+                que.append([nx,ny])
+                com.append([nx,ny])
+                visited[nx][ny]=day
+        nx=c[0]+dx[3]
+        ny=c[1]+dy[3]
+        if nx>=0 and nx<n and ny>=0 and ny<n:
+            if visited[nx][ny]!=day and (abs(land[c[0]][c[1]]-land[nx][ny])>=l and abs(land[c[0]][c[1]]-land[nx][ny])<=r):
+                que.append([nx,ny])
+                com.append([nx,ny])
+                visited[nx][ny]=day
 
-while True:
-    time+=1
-    tail_judge=0
-    snake_info.insert(0,[snake_info[0][0]+way[snake_info[0][2]][0],snake_info[0][1]+way[snake_info[0][2]][1],snake_info[0][2]])
-    snake_info[0][2]=turn_snake(spin_info,time,snake_info)
-    if snake_info[0][0]<1 or snake_info[0][0]>n:
-        break
-    elif snake_info[0][1]<1 or snake_info[0][1]>n:
-        break
-    for tail in snake_info[1:]:
-        if snake_info[0][0]==tail[0] and snake_info[0][1]==tail[1]: 
-            tmp=1
-            break
-    if tmp==1:
-        break
-    for i in range(0,len(apple_info)):
-        if snake_info[0][0]==apple_info[i][0] and snake_info[0][1]==apple_info[i][1]:
-            tail_judge=1
-            del apple_info[i]
-            break
-    if tail_judge==0:
-        del snake_info[-1]   
-        tail_judge=0   
 
-print(time)
 
-   
-    
+    if num>=2:
+        tot=tot//num
+        for i in com:
+            land[i[0]][i[1]]=tot
+        return True
+    elif num==1:
+        return False
+
+visited=[[0]*n for _ in range(n)]
+check=False
+for day in range(1,2002):
+    for i in range(0,n):
+        for j in range(0,n):
+            t=dfs(i,j,day)
+            if t:
+                check=True 
+    if check==False:
+        break
+    check=False
+print(day-1)
+
 
