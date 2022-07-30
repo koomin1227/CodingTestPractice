@@ -3,6 +3,7 @@ from collections import deque
 from itertools import product
 import copy
 import heapq
+
 input=stdin.readline
 v=int(input())
 graph=[[]for _ in range(v+1)]
@@ -35,7 +36,6 @@ while que:
             que.append(i[0])
             visited[i[0]]=visited[n]+i[1]
 
-print(max(visited))
 
 
 
