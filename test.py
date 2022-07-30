@@ -114,12 +114,7 @@ for _ in range(2):
                         maxi=max(maxi,tot)  
 print(maxi)            
 
-# tetro4=rotation(tetro4)
-# print(tetro4)
-# tetro4=rotation(tetro4)
-# print(tetro4)
-# for i in range(3):
-#     print(tetro4[i])
+
 
 
 
