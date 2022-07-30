@@ -112,7 +112,9 @@ for _ in range(2):
                     if tetro7[x][y]==1:
                         tot+=mop[i+x][j+y]
                         maxi=max(maxi,tot)  
-print(maxi)            
+print(maxi)   
+print(a)
+         
 
 
 
