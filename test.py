@@ -113,8 +113,9 @@ for _ in range(2):
                         tot+=mop[i+x][j+y]
                         maxi=max(maxi,tot)  
 print(maxi)   
-print(a)
-         
+print(1)
+print(2)
+print(3)
 
 
 
