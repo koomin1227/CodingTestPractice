@@ -1,5 +1,5 @@
 #https://www.acmicpc.net/problem/5639
-#첫번째 시도 실패 (시간초과)
+#두번째 시도 (성공)
 import sys 
 from collections import deque
 from itertools import product
@@ -8,30 +8,30 @@ import heapq
 input=sys.stdin.readline
 sys.setrecursionlimit(10**9)
 num_list = []
+#입력
 while True:
     try:
         num = int(input())
-        num_list.append([num,0])
+        num_list.append(num)
     except:
         break
-tree={}
-for i in range(len(num_list)):
-    left=0
-    right=0
-    for j in range(i+1,len(num_list)):
-        if num_list[j][1]==1:
-            break
-        if left==0 and num_list[j][0]<num_list[i][0]:
-            left=num_list[j][0]
-            num_list[j][1]=1
-        elif right==0 and num_list[j][0]>num_list[i][0]:
-            right=num_list[j][0]
-            num_list[j][1]=1
-    tree[num_list[i][0]]=[left,right]
-def post_search(node):
-    if node==0:
+#전위순회 자체에서 후위 순회를 실시한다
+def post_search(start,end):
+    if start>=end:
         return 
-    post_search(tree[node][0])
-    post_search(tree[node][1])
-    print(node)
-post_search(num_list[0][0])
+    root=num_list[start]
+    #오른쪽 노드가 존재하지 않는 경우
+    if num_list[end-1]<=root:
+        post_search(start+1,end)
+        print(root)
+        return
+    tmp=0
+    for i in range(start+1,end+1):
+        if root<num_list[i]:
+            tmp=i
+            break
+
+    post_search(start+1,tmp)
+    post_search(tmp,end)
+    print(root)
+post_search(0,len(num_list))
