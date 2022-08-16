@@ -9,7 +9,6 @@ st=input().rstrip()
 boom=input().rstrip()
 boom_len=len(boom)
 boom_last=boom[-1]
-
 nst=[]
 cnt=0
 for i in range(len(st)):
