@@ -20,14 +20,9 @@
 from sys import stdin
 input=stdin.readline
 x,y=map(int,input().split())
-if x==0:
-    z=0
-else:
-    z=int((y*100/x))
+z=int((y*100/x))
 if z>=99:
     print(-1)
-elif x==0:
-    print(1)
 else:
     left=0
     right=1000000000
