@@ -1,0 +1,20 @@
+x, y = map(int, input().split())
+percent = y * 100 // x
+
+if percent >= 99:
+    print(-1)
+else:
+    left = 1
+    right = 1000000000
+    count = 0
+    while left <= right:
+        mid = (left + right) // 2
+        nx = x + mid
+        ny = y + mid
+        nz = ny * 100 // nx
+        if percent != nz:
+            right = mid - 1
+            count = mid
+        else:
+            left = mid + 1
+    print(count)
