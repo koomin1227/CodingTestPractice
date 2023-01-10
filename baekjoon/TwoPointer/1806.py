@@ -41,4 +41,4 @@ if min_len==n+1:
     print(0)
 else:
     print(min_len)
-
+#골드문제
