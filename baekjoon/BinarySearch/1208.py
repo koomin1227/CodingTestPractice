@@ -8,7 +8,7 @@ tot=0
 # 1. 수열을 반으로 쪼갠다
 front=arr[:n//2]
 rear=arr[(n//2):]
-# 2. 두 수열의 부분 합으 구한다.
+# 2. 두 수열의 부분 합을 구한다.
 fSum=[]
 for i in range(1,len(front)+1):
     for j in combinations(front,i):
@@ -16,7 +16,6 @@ for i in range(1,len(front)+1):
         if tmp==s:
             tot+=1
         fSum.append(tmp)
-# print(fSum)
 rSum=[]
 for i in range(1,len(rear)+1):
     for j in combinations(rear,i):
@@ -24,7 +23,6 @@ for i in range(1,len(rear)+1):
         if tmp==s:
             tot+=1
         rSum.append(tmp)
-# print(rSum)
 # 3. rear 수열을 정렬
 rSum.sort()
 # 4. fSum을 훑으며 sum-fSum[i] 인 값을 rSum에서 이진 탐색으로 찾는다.
@@ -60,8 +58,7 @@ for i in fSum:
             tot+=(rans-lans)+1
 print(tot)        
 
-# print(front)
-# print(rear)
+
 
 
 
