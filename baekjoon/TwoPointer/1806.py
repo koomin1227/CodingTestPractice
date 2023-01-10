@@ -7,7 +7,7 @@ pro=list(map(int,input().split()))
 l=n-1
 f=0
 r=0
-min_len=n
+min_len=n+1
 tot=pro[0]
 while r<n:
     if f<n-1:
@@ -27,5 +27,8 @@ while r<n:
             min_len=min(min_len,f-r+1)
         tot-=pro[r]
         r+=1
-print(min_len)
+if min_len==n+1:
+    print(0)
+else:
+    print(min_len)
 
