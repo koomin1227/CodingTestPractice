@@ -1,10 +1,10 @@
-#https://www.acmicpc.net/problem/2467
+#https://www.acmicpc.net/problem/2473
 from sys import stdin
 input=stdin.readline
 
 n=int(input())
 arr=list(map(int,input().split()))
-
+arr.sort()
 def minimum(mini,a,f,r):
     if mini[0]>a:
         mini[0]=a
@@ -14,16 +14,16 @@ def minimum(mini,a,f,r):
 #투포인터
 r=0
 f=n-1
-mini=[abs(arr[r]+arr[f]),f,r]
+mini=[3000000000,f,r]
 
 while True:
-    if r+1==f:
-        break
-    if abs(arr[r+1]+arr[f])<abs(arr[r]+arr[f-1]):
-        mini=minimum(mini,abs(arr[r+1]+arr[f]),f,r+1)
+    cur_sum=arr[r]+arr[f]
+    mini=minimum(mini,abs(cur_sum),f,r)
+    if cur_sum<0:
         r=r+1
     else:
-        mini=minimum(mini,abs(arr[r]+arr[f-1]),f-1,r)
         f=f-1
+    if r==f:
+        break
     
 print(arr[mini[2]], arr[mini[1]])
