@@ -1,6 +1,6 @@
 #https://www.acmicpc.net/problem/2473
 from sys import stdin
-input=stdin.readline
+input=stdin.readline 
 
 n=int(input())
 arr=list(map(int,input().split()))
