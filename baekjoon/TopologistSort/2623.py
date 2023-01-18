@@ -28,5 +28,4 @@ if len(ans)==n:
         print(i) 
 else:
     print(0)
-# print(graph)
-# print(indegree)
+
