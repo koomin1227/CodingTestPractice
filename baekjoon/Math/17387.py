@@ -2,15 +2,8 @@
 from sys import stdin
 input=stdin.readline
 def CCW(x1,y1,x2,y2,x3,y3):
-    tmp=x1*y2 + x2*y3 + x3*y1 - (x2*y1 + x3*y2 + x1*y3)
-    if abs(tmp)-0.000001==0:
-        return 0
-    elif tmp==0:
-        return 0
-    elif tmp<0:
-        return -1
-    else:
-        return 1
+    return x1*y2 + x2*y3 + x3*y1 - (x2*y1 + x3*y2 + x1*y3)
+
 #ccw 음수: 시계방향, 양수: 반시계 방향, 0: 평행
 x1,y1,x2,y2=map(int,input().split())
 x3,y3,x4,y4=map(int,input().split())
