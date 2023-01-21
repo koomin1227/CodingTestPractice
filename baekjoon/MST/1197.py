@@ -3,29 +3,46 @@ from sys import stdin
 from collections import deque
 input=stdin.readline
 
-v,e=map(int,input().split())
-vSet=[-1 for _ in range(v+1)]
-ed=[]
-for i in range(e):
-    a,b,c=map(int,input().split())
-    ed.append([c,a,b])
-ed.sort()
-edge=deque(ed)
-ecnt=0
-etot=0
-def find(vNum):
-    if vSet[vNum]==-1:
-        return vNum
-    while vSet[vNum]!=-1:
-        vNum=vSet[vNum]
-    return vNum
+def find_parent(parent, x):
+    if parent[x] != x:
+        parent[x] = find_parent(parent, parent[x])
+    return parent[x]
 
-while ecnt<v-1:
-    tmp=edge.popleft()
-    vnum1=find(tmp[1])
-    vnum2=find(tmp[2])
-    if vnum1!=vnum2:
-        ecnt+=1
-        etot+=tmp[0]
-        vSet[vnum2]=vnum1
-print(etot)
+def union_parent(parent, a, b):
+    a = find_parent(parent, a)
+    b = find_parent(parent, b)
+    if a < b:
+        parent[b] = a
+    else:
+        parent[a] = b
+
+v,e=map(int,input().split())
+parent = [0] * (v + 1)
+
+for i in range(1, v + 1):
+    parent[i] = i
+
+edges = []
+result = 0
+
+# 간선을 입력받아 coat를 기준으로 오름차순 정렬
+for _ in range(e):
+    a, b, cost = map(int, input().split())
+    edges.append((cost, a, b))
+
+edges.sort()
+tot=[]
+# 정렬된 간선을 하나씩 확인
+for edge in edges:
+    cost, a, b = edge
+    # 두 노드의 루트 노드가 서로 다르다면 사이클이 발생하지 않은것이므로  
+    if find_parent(parent, a) != find_parent(parent, b):
+        # 신장 트리에 간선 추가
+        union_parent(parent, a, b)
+        result += cost
+        tot.append(cost)
+print(result-tot.pop())
+
+
+
+
