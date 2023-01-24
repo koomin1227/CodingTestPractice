@@ -14,8 +14,5 @@ for i in range(1,n):
         dp[r][c]=2147483648
         for k in range(r,c):
             dp[r][c]=min(dp[r][c],dp[r][k]+dp[k+1][c]+(ma[r][0]*ma[k][1]*ma[c][1]))
-for i in dp:
-    print(i)
-
 print(dp[0][n-1])
 
