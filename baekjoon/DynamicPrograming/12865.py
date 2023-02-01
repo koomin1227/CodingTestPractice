@@ -16,3 +16,4 @@ for i in range(1,n+1):
             dp[i][j]=dp[i-1][j]
 
 print(dp[n][k])
+#잔디가 왜 안될까
