@@ -25,12 +25,10 @@ for _ in range(k):
                     if visited[i] == 0:
                         visited[i] = ind * -1
                         que.append((i, ind * -1))
-                    elif visited[i] == ind * -1:
-                        is_bipar = 1
-                    elif visited[i] != ind * -1:
+                    elif visited[i] == ind:
                         is_bipar = 0
                         break
-        elif is_bipar==0:
+        if is_bipar==0:
             break
 
     if is_bipar:
