@@ -12,3 +12,7 @@ def solution(numbers, target):
         dfs(depth + 1, tot - numbers[depth])
     dfs(0,0)
     return answer
+
+
+
+    
