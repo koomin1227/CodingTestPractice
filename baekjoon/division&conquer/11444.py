@@ -8,7 +8,7 @@ def mul(A,B):
     for i in range(n):
         for j in range(n):
             for k in range(n):
-                tmp = A[i][k]*B[k][j]
+                tmp = A[i][k]*B[k][j]   
                 C[i][j]+=tmp
                 C[i][j] %= 1000000007
     return C
