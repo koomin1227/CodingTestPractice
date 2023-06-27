@@ -44,5 +44,3 @@ for _ in range(t):
             tree[pre[0]][1] = make_tree(tree,new_ino[root+1:])
         post_order(pre[0],tree)
         print()
-
-
