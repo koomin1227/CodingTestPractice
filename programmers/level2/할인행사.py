@@ -10,17 +10,15 @@ def solution(want, number, discount):
             if dic[want[i]]<number[i]:
                 check = 0
                 break
-        return check
-                
+        return check    
     for i in range(10):
         if discount[i] not in dic:
-            dic[discount[i]] = 1    
-        else:
-            dic[discount[i]] +=1
+            dic[discount[i]] = 0    
+        dic[discount[i]] +=1
     leng = len(discount)
     if check(dic,want,number):
             answer+=1
-    for i in range(1,leng - 10+1):
+    for i in range(1,leng - 9):
         dic[discount[i-1]]-=1
         if discount[i+9] not in dic:
             dic[discount[i+9]] = 0 
