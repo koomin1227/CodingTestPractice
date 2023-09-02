@@ -20,3 +20,4 @@ for j in range(3):
         if j!=i:
             ans = min(ans,dp[-1][i])
 print(ans)
+
