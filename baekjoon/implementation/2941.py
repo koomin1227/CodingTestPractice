@@ -1,3 +1,4 @@
+#https://www.acmicpc.net/problem/2941
 string = input()
 tot = 0
 i = 0
