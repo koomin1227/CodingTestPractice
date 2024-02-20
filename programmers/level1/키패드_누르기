@@ -1,0 +1,40 @@
+def find_position(keypad, target):
+    for i in range(4):
+        for j in range(3):
+            if keypad[i][j] == target:
+                return [i,j]
+def solution(numbers, hand):
+    answer = ''
+    keypad = [[1,2,3],[4,5,6],[7,8,9],[-1,0,-1]]
+    left_number = [1,4,7]
+    right_number = [3,6,9]
+
+    hand_pos = {'left': [3, 0], 'right': [3, 2]}
+    if hand == 'left':
+        main_hand = 'L'
+    else:
+        main_hand = 'R'
+    
+    for number in numbers:
+        if number in left_number:
+            answer += 'L'
+            hand_pos['left'] = find_position(keypad, number)
+        elif number in right_number:
+            answer += 'R'
+            hand_pos['right'] = find_position(keypad, number)
+        else:
+            num_pos = find_position(keypad, number)
+            left_dist = abs(hand_pos['left'][0] - num_pos[0]) + abs(hand_pos['left'][1] - num_pos[1])
+            right_dist = abs(hand_pos['right'][0] - num_pos[0]) + abs(hand_pos['right'][1] - num_pos[1])
+
+            if left_dist < right_dist:
+                hand_pos['left'] = num_pos
+                answer += 'L'
+            elif left_dist > right_dist:
+                hand_pos['right'] = num_pos
+                answer += 'R'
+            else:
+                hand_pos[hand] = num_pos
+                answer += main_hand
+                
+    return answer
