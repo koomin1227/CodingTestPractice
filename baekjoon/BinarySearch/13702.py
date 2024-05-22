@@ -5,9 +5,9 @@ for i in range(n):
     drink.append(int(input()))
 
 l = 1
-r = sum(drink) // k + 1
+r = max(drink)
 
-while l < r:
+while l <= r:
     mid = (l + r) // 2
     total_amount = 0
     total_count = 0
@@ -16,7 +16,7 @@ while l < r:
         total_amount += mid * (d // mid)
 
     if total_count < k:
-        r = mid
+        r = mid - 1
     elif total_count >= k:
         l = mid + 1
 
