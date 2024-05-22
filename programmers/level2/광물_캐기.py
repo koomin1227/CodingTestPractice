@@ -17,8 +17,8 @@ def solution(picks, minerals):
             else:
                 tmp[2] += 1
         order.append(tmp)
-    for o in order:
-        if picks
+    # for o in order:
+        # if picks
     order.sort(key=lambda x:(-x[0],-x[1],-x[2]))
     # print(section_cnt)
     print(order)
