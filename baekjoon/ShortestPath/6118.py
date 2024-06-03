@@ -1,4 +1,6 @@
 import heapq
+from sys import stdin
+input = stdin.readline
 INF = 100000
 n,m = map(int, input().split())
 
