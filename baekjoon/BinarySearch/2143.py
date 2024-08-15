@@ -43,7 +43,6 @@ for i in range(n):
     accum_a.append(tot)
 for i in range(1, n + 1):
     for j in range(i,n + 1):
-        # A.append(sum(a[i:j+1]))
         A.append(accum_a[j] - accum_a[i - 1])
 
 tot = 0
@@ -53,7 +52,6 @@ for i in range(m):
 
 for i in range(1, m + 1):
     for j in range(i,m + 1):
-        # B.append(sum(b[i:j+1]))
         B.append(accum_b[j] - accum_b[i-1])
 B.sort()
 answer = 0
@@ -66,12 +64,3 @@ for i in A:
 
 
 print(answer)
-
-
-
-
-# [1,2,3]
-# [0,1,3,6]
-# 0,0 = 1
-# 0,1 = 3
-# 0,2 =
