@@ -1,4 +1,5 @@
 from sys import stdin
+from collections import defaultdict
 input=stdin.readline
 
 def binary_search_left(target,B):
@@ -33,7 +34,7 @@ a = list(map(int,input().split()))
 m = int(input())
 b = list(map(int,input().split()))
 A = []
-B = []
+B = defaultdict(int)
 accum_a = [0]
 accum_b = [0]
 
@@ -52,15 +53,18 @@ for i in range(m):
 
 for i in range(1, m + 1):
     for j in range(i,m + 1):
-        B.append(accum_b[j] - accum_b[i-1])
-B.sort()
+        B[accum_b[j] - accum_b[i-1]] += 1
+        # B.append(accum_b[j] - accum_b[i-1])
+# B.sort()
 answer = 0
 for i in A:
     target = t - i
-    l = binary_search_left(target, B)
-    if l != -1:
-        r = binary_search_right(target, B)
-        answer += (r - l + 1)
+    # if target > 0:
+    answer += B[target]
+    # l = binary_search_left(target, B)
+    # if l != -1:
+    #     r = binary_search_right(target, B)
+    #     answer += (r - l + 1)
 
 
 print(answer)
