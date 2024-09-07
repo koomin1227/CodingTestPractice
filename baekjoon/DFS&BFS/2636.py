@@ -53,8 +53,3 @@ while True:
 
 print(t)
 print(r)
-# for j in cheese:
-#     print(j)
-
-
-# print(cheese)
