@@ -18,10 +18,6 @@ n,m, k=map(int,input().split())
 inventors = list(map(int, input().split()))
 parent = [0] * (n + 1)
 
-is_supplied = [0] * (n + 1)
-for i in inventors:
-    is_supplied[i] = i
-
 for i in range(1, n + 1):
     parent[i] = i
 for i in inventors:
