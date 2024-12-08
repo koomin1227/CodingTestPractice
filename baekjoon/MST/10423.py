@@ -1,25 +1,3 @@
-# n, m, k = map(int, input().split())
-# inventors = list(map(int, input().split()))
-# cables = []
-# for i in range(m):
-#     u, v, w = map(int, input().split())
-#     cables.append((w,u,v))
-# cables.sort()
-# vertex = set(inventors)
-# answer = 0
-# answer_road = []
-# for cable in cables:
-#     w, u, v = cable
-#     if u in vertex and v in vertex:
-#         continue
-#     else:
-#         answer += w
-#         answer_road.append(cable)
-#         vertex.add(u)
-#         vertex.add(v)
-# print(answer_road)
-# print(answer)
-
 from sys import stdin
 input = stdin.readline
 
