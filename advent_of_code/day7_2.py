@@ -862,7 +862,8 @@ input = """31084: 8 67 8 735 38
 def is_correct(target, nums, depth, result):
     if depth == len(nums) - 1:
         return result == target
-
+    if result > target:
+        return False
     if is_correct(target, nums, depth + 1, result + nums[depth + 1]):
         return True
     if is_correct(target, nums, depth + 1, result * nums[depth + 1]):
@@ -870,6 +871,8 @@ def is_correct(target, nums, depth, result):
     if is_correct(target, nums, depth + 1, int(str(result) + str(nums[depth + 1]))):
         return True
     return False
+import time
+start_time = time.time()
 answer = 0
 for equation in input.split('\n'):
     # 파싱
@@ -881,5 +884,8 @@ for equation in input.split('\n'):
         answer += target
 
 print(answer)
+end_time = time.time()
+
+print(f"Execution time: {end_time - start_time:.6f} seconds")
 
     
