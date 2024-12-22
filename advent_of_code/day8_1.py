@@ -93,9 +93,3 @@ for frequency in antenna_location:
 
 print(answer)
         
-        
-
-# for i in antenna_map:
-#     print(i)
-# print(antenna_location)
-# print(antenna_map)
