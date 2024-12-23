@@ -49,8 +49,6 @@ for i in range(len(input)):
     else:
         file += ["."] * int(input[i])
     is_block = not is_block
-empty_space = find_empty_space(file, 4, len(file))
-print(empty_space)
 
 id = id - 1
 while True:
@@ -61,18 +59,7 @@ while True:
     id -= 1
     if empty_space == None:
         continue
-    file = move(file, empty_space, data_space)
-    
-
-# print(file)
-# empty_id = find_next_empty_id(-1, file)
-# data_id = find_next_data_id(len(file), file)
-
-# while empty_id < data_id:
-#     file[empty_id] = file[data_id]
-#     file[data_id] = '.'
-#     empty_id = find_next_empty_id(empty_id, file)
-#     data_id = find_next_data_id(data_id, file)
+    file = move(file, empty_space, data_space)  
 
 i = 0
 checksum = 0
