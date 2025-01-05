@@ -16,7 +16,7 @@ def dfs(now,is_visit, strength):
     global max_strength
 
     max_strength = max(max_strength, strength)
-    for idx in range(now[0] * m + now[1] + 1, n * m):
+    for idx in range(now[0] * m + now[1], n * m):
         i = idx // m
         j = idx % m
         if is_visit[i][j] == 1:
