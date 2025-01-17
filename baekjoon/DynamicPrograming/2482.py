@@ -2,7 +2,7 @@ n = int(input())
 k = int(input())
 
 dp = [[0] * (k + 1) for _ in range(n + 1)]
-# dp[1][1] = 1
+
 for i in range(0, n + 1):
     for j in range(0, k + 1):
         if j == 1:
